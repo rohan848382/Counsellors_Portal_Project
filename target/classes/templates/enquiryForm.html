@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add New Enquiry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+        .container {
+            margin-top: 30px; /* Top margin for spacing */
+            border-radius: 10px; /* Rounded corners */
+            background-color: white; /* White background for the form */
+            padding: 30px; /* Padding around the form */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+        h2 {
+            margin-bottom: 20px; /* Space below heading */
+            text-align: center; /* Center align heading */
+        }
+        .nav-link {
+            margin-right: 15px; /* Space between nav links */
+        }
+        .alert {
+            margin-bottom: 20px; /* Space below alert messages */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="dashboard">View Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="enquiry">Add Enquiry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="view-enquiries">View Enquiry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout">Logout</a>
+            </li>
+        </ul>
+
+        <h2>Add New Enquiry</h2>
+        
+        <div class="alert alert-danger" th:if="${emsg}" role="alert">
+            <p th:text="${emsg}"></p>
+        </div>
+        <div class="alert alert-success" th:if="${smsg}" role="alert">
+            <p th:text="${smsg}"></p>
+        </div>
+
+        <form th:action="@{/addEnq}" th:object="${enquiry}" method="post">
+            <div class="mb-3">
+                <label for="stuName" class="form-label">Student Name:</label>
+                <input type="text" th:field="*{stuName}" class="form-control" id="stuName" required>
+                <input type="hidden" th:field="*{enqId}" required>
+            </div>
+            <div class="mb-3">
+                <label for="studentphno" class="form-label">Student Phone Number:</label>
+                <input type="tel" th:field="*{studentphno}" class="form-control" id="studentphno" required>
+            </div>
+            <div class="mb-3">
+                <label for="classMode" class="form-label">Training Mode:</label>
+                <select th:field="*{classMode}" class="form-select" id="classMode" required>
+                    <option value="">-Select-</option>
+                    <option value="Online">Online</option>
+                    <option value="Classroom">Classroom</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="courseName" class="form-label">Select Course:</label>
+                <select th:field="*{courseName}" class="form-select" id="courseName" required>
+                    <option value="">-Select-</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="AWS">AWS</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="enqStatus" class="form-label">Enquiry Status:</label>
+                <select th:field="*{enqStatus}" class="form-select" id="enqStatus" required>
+                    <option value="">-Select-</option>
+                    <option value="Open">Open</option>
+                    <option value="Enrolled">Enrolled</option>
+                    <option value="Lost">Lost</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
